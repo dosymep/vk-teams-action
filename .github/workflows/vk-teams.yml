@@ -1,0 +1,75 @@
+name: vk-teams
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ main, master ]
+    
+jobs:
+  vk-teams:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Send message (default)
+        uses: ./
+        with:
+          to: ${{ secrets.VK_TEAMS_TO }}
+          token: ${{ secrets.VK_TEAMS_TOKEN }}
+          api_url: ${{ secrets.VK_TEAMS_API_URL }}
+
+      - name: Send message (html)
+        uses: ./
+        with:
+          to: ${{ secrets.VK_TEAMS_TO }}
+          token: ${{ secrets.VK_TEAMS_TOKEN }}
+          api_url: ${{ secrets.VK_TEAMS_API_URL }}
+          format: HTML
+          message: |
+            <a href="https://github.com/${{ github.repository }}">#42</a>
+            <a href="https://github.com/${{ github.repository }}">repository</a>
+
+      - name: Send message (MarkdownV2)
+        uses: ./
+        with:
+          to: ${{ secrets.VK_TEAMS_TO }}
+          token: ${{ secrets.VK_TEAMS_TOKEN }}
+          api_url: ${{ secrets.VK_TEAMS_API_URL }}
+          format: MarkdownV2
+          message: |
+            [#42](https://github.com/${{ github.repository }})
+            [repository](https://github.com/${{ github.repository }})
+
+      - name: Create sample file
+        run: echo "Hello world" > sample.txt
+      
+      - name: Send message file (MarkdownV2)
+        uses: ./
+        with:
+          to: ${{ secrets.VK_TEAMS_TO }}
+          token: ${{ secrets.VK_TEAMS_TOKEN }}
+          api_url: ${{ secrets.VK_TEAMS_API_URL }}
+          format: MarkdownV2
+          message_file: sample.txt
+          
+      - name: Send file (MarkdownV2)
+        uses: ./
+        with:
+          to: ${{ secrets.VK_TEAMS_TO }}
+          token: ${{ secrets.VK_TEAMS_TOKEN }}
+          api_url: ${{ secrets.VK_TEAMS_API_URL }}
+          format: MarkdownV2
+          file_path: sample.txt
+          message: |
+            [#42](https://github.com/${{ github.repository }})
+            [repository](https://github.com/${{ github.repository }})
+
+      - name: Send message file and file (MarkdownV2)
+        uses: ./
+        with:
+          to: ${{ secrets.VK_TEAMS_TO }}
+          token: ${{ secrets.VK_TEAMS_TOKEN }}
+          api_url: ${{ secrets.VK_TEAMS_API_URL }}
+          format: MarkdownV2
+          file_path: sample.txt
+          message_file: sample.txt

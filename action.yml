@@ -1,0 +1,37 @@
+name: 'VK Teams Notification'
+description: 'Sending a VK Teams message'
+
+author: 'dosymep'
+
+inputs:
+  to:
+    required: true
+    description: 'chat id'
+  token:
+    required: true
+    description: 'bot token'
+  api_url:
+    required: true
+    default: 'https://myteam.mail.ru/bot/v1'
+    description: 'bot api url'
+  message:
+    required: false
+    description: 'custom message'
+  message_file:
+    required: false
+    description: 'overwrite the default message template with the contents of the specified file'
+  format:
+    required: false
+    default: 'MarkdownV2'
+    description: 'message format: MarkdownV2, HTML'
+  file_path:
+    required: false
+    description: 'send file'
+
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+
+branding:
+  icon: 'send'
+  color: 'blue'
