@@ -24,7 +24,7 @@ Default message
 
 ```yml
 - name: Send message (default)
-  uses: dosymep/vk-teams-action@v1
+  uses: dosymep/vk-teams-action@v1.0.0
   with:
     to: ${{ secrets.VK_TEAMS_TO }}
     token: ${{ secrets.VK_TEAMS_TOKEN }}
@@ -35,7 +35,7 @@ Custom message
 
 ```yml
 - name: Send message (custom)
-  uses: dosymep/vk-teams-action@v1
+  uses: dosymep/vk-teams-action@v1.0.0
   with:
     to: ${{ secrets.VK_TEAMS_TO }}
     token: ${{ secrets.VK_TEAMS_TOKEN }}
